@@ -990,6 +990,22 @@ file to load:
 gem 'state_machine', :require => 'state_machine/core'
 ```
 
+### Translation (Internationalization)
+
+Add to your locale file, for example: config/locales/en.yml
+
+```
+en:
+  activerecord:
+    state_machines:
+      vehicle:
+        states:
+          parked: On parking
+        events:
+          ignite: Start engine
+```
+
+
 ## Tools
 
 ### Generating graphs
