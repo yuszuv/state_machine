@@ -26,9 +26,12 @@ module StateMachine
     def initialize_states(object, options = {})
       assert_valid_keys(options, :static, :dynamic, :to)
       options = {:static => true, :dynamic => true}.merge(options)
+
+      result = {}
       
-      each_value do |machine| 
-        machine.initialize_state(object, :force => options[:static] == :force, :to => options[:to]) unless machine.dynamic_initial_state?
+      each_value.inject(result) do |ans, machine| 
+        ans[machine.name.to_s] = machine.initialize_state(object, :force => options[:static] == :force, :to => options[:to]) unless machine.dynamic_initial_state?
+        ans
       end if options[:static]
       
       result = yield if block_given?

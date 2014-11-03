@@ -702,11 +702,12 @@ module StateMachine
         value = state.value
         
         if hash = options[:to]
-          hash[attribute.to_s] = value
+          ans = hash[attribute.to_s] = value
         else
-          write(object, :state, value)
+          ans = write(object, :state, value)
         end
       end
+      ans
     end
     
     # Gets the actual name of the attribute on the machine's owner class that
